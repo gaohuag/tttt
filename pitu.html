@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .preview1 img {
+            width: 100px;
+        }
+    </style>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+</head>
+<body>
+<table id="myTable" class="display" style="width:100%">
+    <thead>
+    <tr>
+        <th>素材图</th>
+        <th>素材ID</th>
+        <th>融合参数</th>
+        <th>脸型参数</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>素材图</th>
+        <th>素材ID</th>
+        <th>融合参数</th>
+        <th>脸型参数</th>
+    </tr>
+    </tfoot>
+</table>
+
+
+<form target="rest" id="form">
+    <fieldset>
+        <div>
+            <ul class="form-list">
+                <li class="pure-text-row">
+                    <div class="form-label"><label for="">融合参数</label></div>
+                    <div class="form-input"><p data-role="qc-radio-group">
+                        <label data-role="qc-radio-item" title="" class="form-ctrl-label">
+                            <input type="radio" name="blend" class="tc-15-radio" value="0.2"> 最低
+                        </label>
+                        <label data-role="qc-radio-item" title="" class="form-ctrl-label">
+                            <input type="radio" name="blend"
+                                   class="tc-15-radio"
+                                   value="0.4"> 低</label>
+                        <label data-role="qc-radio-item" title="" class="form-ctrl-label">
+                            <input type="radio"
+                                   name="blend"
+                                   class="tc-15-radio"
+                                   value="0.5"> 默认</label>
+                        <label data-role="qc-radio-item" title="" class="form-ctrl-label">
+                            <input type="radio"
+                                   name="blend"
+                                   class="tc-15-radio"
+                                   value="0.6"> 高</label>
+                        <label data-role="qc-radio-item" title="" class="form-ctrl-label">
+                            <input type="radio"
+                                   name="blend"
+                                   class="tc-15-radio"
+                                   value="0.8"> 最高</label>
+                    </p>
+                        <p class="form-input-help text-weak" style="margin-top: 4px;">融合数值越高，融合后的五官越像模特</p></div>
+                </li>
+                <li class="pure-text-row">
+                    <div class="form-label"><label for="">脸型参数</label></div>
+                    <div class="form-input"><p data-role="qc-radio-group">
+                        <label data-role="qc-radio-item" title=""
+                               class="form-ctrl-label"><input
+                                type="radio" name="position" class="tc-15-radio" value="0.0"> 最低</label> <label
+                            data-role="qc-radio-item" title="" class="form-ctrl-label">
+                        <input type="radio"
+                               name="position"
+                               class="tc-15-radio"
+                               value="0.3"> 低</label>
+                        <label data-role="qc-radio-item" title="" class="form-ctrl-label">
+                            <input type="radio"
+                                   name="position"
+                                   class="tc-15-radio"
+                                   value="0.5"> 默认</label>
+                        <label data-role="qc-radio-item" title="" class="form-ctrl-label">
+                            <input type="radio"
+                                   name="position"
+                                   class="tc-15-radio"
+                                   value="0.7"> 高</label>
+                        <label data-role="qc-radio-item" title="" class="form-ctrl-label">
+                            <input type="radio"
+                                   name="position"
+                                   class="tc-15-radio"
+                                   value="1"> 最高</label>
+                    </p>
+                        <p class="form-input-help text-weak" style="margin-top: 4px;">脸型数值越高，融合后的脸型越像模特</p></div>
+                </li>
+                <li class="pure-text-row">
+                    <div class="form-label"><label for="">测试素材效果</label></div>
+                    <div class="form-input">
+                        <div style="float: left; width: 135px; height: 200px; text-align: center;"><p
+                                class="form-input-help text-weak">素材</p>
+                            <div style="border: 1px dashed rgb(237, 239, 242); width: 130px; height: 130px;">
+                                <img id="am" src="" style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+                        </div>
+                        <div style="float: left; height: 205px; text-align: center; margin: -15px 21px 0px;"><p
+                                class="form-input-help text-weak"></p> <img
+                                src="https://res.tu.qq.com/assets/qcloud_console/qc_add_icon.svg"
+                                style="width: 100%; height: 100%; object-fit: contain;"></div>
+                        <div style="float: left; width: 135px; height: 230px;">
+                            <div style="text-align: center;"><p class="form-input-help text-weak">需融合图片</p></div>
+                            <div style="border: 1px dashed rgb(237, 239, 242); width: 130px; height: 130px;">
+                                <input type="file" accept="image/jpeg, image/png" style="display: none;">
+                                <img id="userImg" src=""
+                                     style="width: 100%; height: 100%; object-fit: contain;"> <!----></div>
+                            <div><input class="input-file" id="fileInput" type="file" onchange=onUpload1(this.files[0])>
+                                <p class="form-input-help text-weak" style="font-size: 12px;">请上传大小不超过500K的jpg或png图片</p>
+                            </div>
+                        </div>
+                        <div style="float: left; height: 205px; text-align: center; margin: -15px 21px 0px;"><p
+                                class="form-input-help text-weak"></p> <img
+                                src="https://res.tu.qq.com/assets/qcloud_console/qc_equal_icon.svg"
+                                style="width: 100%; height: 100%; object-fit: contain;"></div>
+                        <div style="float: left; width: 135px; height: 200px;">
+                            <div style="text-align: center;"><p class="form-input-help text-weak">融合效果</p></div>
+                            <div style="border: 1px dashed rgb(237, 239, 242); width: 130px; height: 130px;">
+                                <img id="res" src="" style="width: 100%; height: 100%; object-fit: contain;"></div>
+                            <div>
+                                <button class="btn btn-success" id="submit">刷新</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </fieldset>
+</form>
+
+<div id="result"></div>
+
+
+<script type="text/javascript">
+    var loaded = false
+    var imageBase64 = ''
+    var am_id;
+
+    $('#submit').click(function () {
+        pitu()
+    })
+    function pitu() {
+        var d = {
+            "img_data": imageBase64,
+            "opdata": [
+                {
+                    "params": {
+                        "model_id": "qc_122_110244_1.jpg",
+                        "alpha_position": parseFloat($("input[name='blend']:checked").val()),
+                        "alpha_blend": parseFloat($("input[name='position']:checked").val())
+                    }
+                }
+            ],
+            "rsp_img_type": "url"
+        };
+        console.log(d)
+
+        $.ajax({
+            type: 'POST',
+            url: '/cgi-bin/pitu_open_access_for_qcloud.fcg',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(d),
+            dataType: "json",
+            success: function (message) {
+                $('#res').attr("src",message.img_url)
+                console.log(message);
+                $("#result").html(JSON.stringify(message));
+            },
+            error: function (message) {
+                console.log(message);
+            }
+        });
+        return false;
+    }
+
+    function onUpload1(file) {
+        var fr = new FileReader();
+        fr.readAsDataURL(file);  // 将文件读取为Data URL
+        loaded = false
+        fr.onload = function (e) {
+            var result = e.target.result;
+            if (/image/g.test(file.type)) {
+                var img = $('<img src="' + result + '">');
+                $('#userImg').attr("src",result);
+                const index = result.indexOf('base64,')
+                const len = index + 'base64,'.length
+                imageBase64 = result.substring(len)
+                loaded = true;
+                return pitu();
+
+            }
+        }
+    }
+
+    $(function () {
+
+        var d = {
+            "project_id": "122"
+        };
+
+        var dat;
+        $.ajax({
+            type: 'POST',
+            url: '/QcloudManager/QueryMaterialInfo',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(d),
+            dataType: "json",
+            success: function (message) {
+                dat = message.itemlist
+                console.log(dat);
+            },
+            error: function (message) {
+                console.log(message);
+            },
+            async: false
+        });
+        $('#myTable').DataTable({
+            data: dat,
+            columns: [
+                {
+                    data: 'thumburl', "render": function (data, type, row, meta) {
+                        return "<img src='" + data + "' style='height: 200px;' />"
+                    }
+                },
+                {data: 'material_id'},
+                {data: 'blend'},
+                {data: 'position'}
+            ]
+        });
+
+        $('#myTable tbody').on( 'click', 'td', function (e) {
+            var trSeq = $(this).parent().parent().find("tr").index($(this).parent()[0]); //行号
+
+            am_id=$(this).parent()[0].cells[1].innerHTML
+
+            $('#am').attr("src",$(this).parent()[0].cells[0].children[0].src);
+
+
+        });
+        return false;
+    });
+
+</script>
+
+</body>
+</html>
+
