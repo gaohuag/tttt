@@ -32,6 +32,7 @@
     <thead>
     <tr>
         <th>素材图</th>
+        <th>状态</th>
         <th>素材ID</th>
         <th>融合参数</th>
         <th>脸型参数</th>
@@ -40,6 +41,7 @@
     <tfoot>
     <tr>
         <th>素材图</th>
+        <th>状态</th>
         <th>素材ID</th>
         <th>融合参数</th>
         <th>脸型参数</th>
@@ -246,6 +248,7 @@
                         return "<img src='" + data + "' style='height: 200px;' />"
                     }
                 },
+                {data: 'status_desc'},
                 {data: 'material_id'},
                 {data: 'blend'},
                 {data: 'position'}
@@ -255,7 +258,7 @@
         $('#myTable tbody').on( 'click', 'td', function (e) {
             var trSeq = $(this).parent().parent().find("tr").index($(this).parent()[0]); //行号
 
-            am_id=$(this).parent()[0].cells[1].innerHTML
+            am_id=$(this).parent()[0].cells[2].innerHTML
 console.log(am_id)
             $('#am').attr("src",$(this).parent()[0].cells[0].children[0].src);
 
