@@ -161,7 +161,7 @@
     var am_id;
 
     $('#submit').click(function () {
-        pitu()
+        return pitu()
     })
     function pitu() {
         var d = {
@@ -169,9 +169,9 @@
             "opdata": [
                 {
                     "params": {
-                        "model_id": "qc_122_110244_1.jpg",
-                        "alpha_position": parseFloat($("input[name='blend']:checked").val()),
-                        "alpha_blend": parseFloat($("input[name='position']:checked").val())
+                        "model_id": am_id,
+                        "alpha_position": parseFloat($("input[name='position']:checked").val()),
+                        "alpha_blend": parseFloat($("input[name='blend']:checked").val())
                     }
                 }
             ],
@@ -256,7 +256,7 @@
             var trSeq = $(this).parent().parent().find("tr").index($(this).parent()[0]); //行号
 
             am_id=$(this).parent()[0].cells[1].innerHTML
-
+console.log(am_id)
             $('#am').attr("src",$(this).parent()[0].cells[0].children[0].src);
 
 
