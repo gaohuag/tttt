@@ -39,8 +39,9 @@
 
             <!-- Button -->
             <div class="controls">
-                <button class="btn btn-success" id="submit">提交</button>
+                <button class="btn btn-success" id="submit">初检</button>
                 <button class="btn btn-success" id="add">添加素材</button>
+                <button class="btn btn-success" id="check">审核素材</button>
             </div>
         </div>
 
@@ -53,6 +54,7 @@
 <script type="text/javascript">
     var loaded = false
     var imageBase64 = ''
+    var mid = ''
 
     function onUpload1(file) {
         var fr = new FileReader();
@@ -71,7 +73,8 @@
             }
         }
     }
-var data;
+
+    var data;
     $('#submit').click(function () {
 
         var d = {};
@@ -103,19 +106,48 @@ var data;
         return false;
     });
     $('#add').click(function () {
-
         var d = {
-            "project_id":"122",
-            "urls":[data.url],
-            "resource_type":"0",
-            "project_name":"test",
-            "session_id":"testsession_id"
+            "project_id": "122",
+            "urls": [data.url],
+            "resource_type": "0",
+            "project_name": "test",
+            "session_id": "testsession_id"
         };
         console.log(d)
 
         $.ajax({
             type: 'POST',
             url: '/QcloudManager/AddMaterialInfo',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(d),
+            dataType: "json",
+            success: function (message) {
+
+                mid = message.material_info[0];
+
+                console.log(message);
+
+                $("#result").html(JSON.stringify(message));
+            },
+            error: function (message) {
+                console.log(message);
+            }
+        });
+        return false;
+    });
+
+
+    $('#check').click(function () {
+
+        var d = {
+            "material_id": mid,
+            "auth_op": 1
+        }
+        console.log(d)
+
+        $.ajax({
+            type: 'POST',
+            url: '/QcloudManager/AuthMaterial',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(d),
             dataType: "json",
