@@ -154,7 +154,7 @@
     </fieldset>
 </form>
 
-<div id="result"></div>
+<div id="result" style="color: red;padding-left: 400px;padding-bottom: 100px;"></div>
 
 
 <script type="text/javascript">
@@ -188,9 +188,15 @@
             data: JSON.stringify(d),
             dataType: "json",
             success: function (message) {
-                $('#res').attr("src",message.img_url)
+                if (message.img_url){
+
+                    $("#result").html('');
+                    $('#res').attr("src",message.img_url)
+                } else {
+
+                    $("#result").html(JSON.stringify(message));
+                }
                 console.log(message);
-                $("#result").html(JSON.stringify(message));
             },
             error: function (message) {
                 console.log(message);
